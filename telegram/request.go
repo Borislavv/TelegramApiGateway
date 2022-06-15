@@ -27,18 +27,21 @@ func (reqMsgs *RequestGetMessages) GetOffset() int64 {
 type RequestSendMessageInterface interface {
 	GetChatId() int64
 	GetMessage() string
+	GetParseMode() string
 }
 
 type RequestSendMessage struct {
-	chatId  int64
-	message string
+	chatId    int64
+	message   string
+	parseMode string
 }
 
 // NewRequestSendMessage is a constructor of RequestSendMessage struct.
-func NewRequestSendMessage(chatId int64, message string) *RequestSendMessage {
+func NewRequestSendMessage(chatId int64, message string, parseMode string) *RequestSendMessage {
 	return &RequestSendMessage{
-		chatId:  chatId,
-		message: message,
+		chatId:    chatId,
+		message:   message,
+		parseMode: parseMode,
 	}
 }
 
@@ -50,4 +53,8 @@ func (reqMsg *RequestSendMessage) GetChatId() int64 {
 // GetMessage is a getter of message field.
 func (reqMsg *RequestSendMessage) GetMessage() string {
 	return reqMsg.message
+}
+
+func (reqMsg *RequestSendMessage) GetParseMode() string {
+	return reqMsg.parseMode
 }

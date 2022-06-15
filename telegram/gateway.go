@@ -9,8 +9,13 @@ import (
 )
 
 const (
+	// Methods
 	getMessagesMethod = "getUpdates"
 	sendMessageMethod = "sendMessage"
+
+	// Parse modes
+	Markdown = "Markdown"
+	HTML     = "HTML"
 )
 
 type TelegramGateway struct {
@@ -59,8 +64,9 @@ func (gateway *TelegramGateway) GetMessages(reqMsgs RequestGetMessagesInterface)
 func (gateway *TelegramGateway) SendMessage(reqMsg RequestSendMessageInterface) error {
 	reqBody, err := json.Marshal(
 		map[string]interface{}{
-			"chat_id": reqMsg.GetChatId(),
-			"text":    reqMsg.GetMessage(),
+			"chat_id":    reqMsg.GetChatId(),
+			"text":       reqMsg.GetMessage(),
+			"parse_mode": reqMsg.GetParseMode(),
 		},
 	)
 	if err != nil {
